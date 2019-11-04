@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<button id="custom-button">Pay with Card</button>
+<script src="https://checkout.stripe.com/checkout.js"></script>
+<script>
+    var handler = StripeCheckout.configure ({
+        key: "{{ key }}",
+        image: "https://stripe.com/img/documentation/checkout/marketplace.png",
+        local: "auto",
+        token: function(token){
+            console.log(token)
+        }
+    });
+    document.getElementById('custom-button').addEventListener("click", function(event){
+        // Open checkout with further options if available
+        handler.open({
+            name: "Post Credits",
+            description: "Charge for Life as a developer credit",
+            amount: '{{ price }}' //cents
+        });
+        event.preventDefault();
+    });
+    // Close Checkout on Page:
+    window.addEventListener("popstate", function(){
+        handler.close();
+    });
+</script>
+{% endblock content %}

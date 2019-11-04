@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="banner_post">
+
+    <h1 class="header_post"><b>The auther of this post is:</b> {{ post.author.username }}</h1>
+    <h3>Content: </h3>
+    <hr> <br>
+    <h3>Title: {{ post.title }}</h3>
+    <p>{{ post.content }}</p>
+
+    <blockquote>Date Created:{{ post.date_created }}</blockquote>
+</div>
+{% endblock content %}
